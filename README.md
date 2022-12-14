@@ -5,7 +5,7 @@ Bienvenue sur mon projet de jeu vidéo en Python ! Ce jeu a été créé en util
 Pour lancer le jeu, assurez-vous d'avoir installé les modules random et pygame en utilisant pip :
 
 ```
-pip install random pygame
+pip install random2 pygame
 ```
 
 Une fois que les modules sont installés, vous pouvez lancer le jeu en exécutant le fichier Minecraft_tnt_rain.py :
