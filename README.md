@@ -21,4 +21,6 @@ Au fur et à mesure que vous esquivez les blocs de TNT, ils deviennent de plus e
 
 Pour jouer, utilisez les touches fléchées droite et gauche de votre clavier pour déplacer votre personnage à droite ou à gauche. Essayez d'éviter les blocs de TNT le plus longtemps possible pour marquer le plus de points possible.
 
+<hr>
+
 N'hésitez pas à me contacter si vous rencontrez des problèmes ou si vous avez des suggestions pour améliorer le jeu !
