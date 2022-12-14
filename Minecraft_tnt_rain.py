@@ -38,6 +38,20 @@ object_speed = 10
 object_width = 40
 object_height = 40
 
+# Définition des variables de jeu, dimensions des objets qui tombent du ciel, position des objets qui tombent du ciel, vitesse des objets qui tombent du ciel.
+object2_x = object_x
+object2_y = object_y
+object2_speed = object_speed
+object2_width = object_width
+object2_height = object_height
+
+# Définition des variables de jeu, dimensions de la vie qui tombent du ciel, position de la vie qui tombent du ciel, vitesse de la vie qui tombent du ciel.
+life_x = random.randint(0, width - 20)
+life_y = 0
+life_speed = 15
+life_width = 40
+life_height = 40
+
 # Boucle principale du jeu, qui permet de faire tourner le jeu en permanence et de gérer les événements qui se produisent pendant le jeu.
 while True:
     
@@ -49,6 +63,9 @@ while True:
 
     # Affichage des objets qui tombent du ciel.
     game_window.blit(pygame.transform.scale(pygame.image.load("object.png"), (object_width, object_height)), (object_x, object_y))
+    game_window.blit(pygame.transform.scale(pygame.image.load("object.png"), (object2_width, object2_height)), (object2_x, object2_y))
+    # Affichage des coeurs qui tombent du ciel.
+    game_window.blit(pygame.transform.scale(pygame.image.load("heart.png"), (life_width, life_height)), (life_x, life_y))
 
     # Vérifie si l'utilisateur a appuyé sur une touche du clavier, pour déplacer le personnage.
     keys = pygame.key.get_pressed()
@@ -63,6 +80,8 @@ while True:
         # Si la touche flèche droite est appuyée, le personnage change d'apparence.
         player_animation = 0
     object_y += object_speed
+    object2_y += object2_speed
+    life_y += life_speed
     
     # Quand auncune touche n'est appuyée, le personnage reste immobile.
     if keys[pygame.K_LEFT] == False and keys[pygame.K_RIGHT] == False:
@@ -77,14 +96,30 @@ while True:
     if object_y >= height:
         object_y = 0
         object_x = random.randint(0, width - 20)
+    if object2_y >= height:
+        object2_y = 0
+        object2_x = random.randint(0, width - 20)
+    if life_y >= height:
+        life_y = 0
+        life_x = random.randint(0, width - 20)
 
-    # Vérifie si le personnage et les objets qui tombent du ciel se touchent.
-    if player_x < object_x + object_width and player_x + player_width > object_x and player_y < object_y + object_height and player_y + player_height > object_y:
-        # Réduit le nombre de vies du personnage de 1.
+    # Si l'objet "object" touche le personnage, le personnage perd une vie
+    if object_x + object_width >= player_x and object_x <= player_x + player_width and object_y + object_height >= player_y and object_y <= player_y + player_height:
         player_life -= 1
-        # Fait réapparaître l'objet à un endroit aléatoire de la fenêtre de jeu.
         object_y = 0
-        object_x = random.randint(0, width - 20)
+        object_x = random.randint(0, width - 20)   
+    
+    # Si l'objet "object" touche le personnage, le personnage perd une vie
+    if object2_x + object2_width >= player_x and object2_x <= player_x + player_width and object2_y + object2_height >= player_y and object2_y <= player_y + player_height:
+        player_life -= 1
+        object2_y = 0
+        object2_x = random.randint(0, width - 20)    
+
+    # Si l'objet "life" touche le personnage, le personnage gagne une vie
+    if life_x + life_width >= player_x and life_x <= player_x + player_width and life_y + life_height >= player_y and life_y <= player_y + player_height:
+        player_life += 1
+        life_y = 0
+        life_x = random.randint(0, width - 20)
 
     # Vérifie si le personnage n'a plus de vie, pour afficher un message de fin de jeu et remettre le score et le nombre de vies du personnage à 0.
     if player_life == 0:
@@ -96,13 +131,18 @@ while True:
         pygame.display.update()
         # Attend 5 secondes avant de remettre le score et le nombre de vies du personnage à 0.
         pygame.time.wait(5000)
-        # Remet le nombre de vies du personnage à 3.
-        player_life = 3
+        # Remet le nombre de vies du personnage à 5.
+        player_life = 5
         # Remet le score du personnage à 0.
         player_score = 0
         # Fait réapparaître l'objet à un endroit aléatoire de la fenêtre de jeu.
         object_y = 0
         object_x = random.randint(0, width - 20)
+        object2_y = 0
+        object2_x = random.randint(0, width - 20)
+        # Fait réapparaître les points de vie à un endroit aléatoire de la fenêtre de jeu.
+        life_y = 0
+        life_x = random.randint(0, width - 20)
 
     # Vérifie si l'objet qui tombe du ciel est arrivé au sol, pour augmenter la vitesse de l'objet, augmenter la taille de l'objet, augmenter le score du personnage et diminuer la vitesse du personnage.
     if object_y == 0:
@@ -111,6 +151,12 @@ while True:
         # Augmente la taille de l'objet qui tombe du ciel.
         object_height += 0.1
         object_width += 0.1
+        # Augmente la vitesse du coeur qui tombe du ciel jusqu'à 30.
+        if life_speed > 1:
+            life_speed -= 1
+        # Réduit la taille du coeur qui tombe du ciel.
+        life_height -= 0.1
+        life_width -= 0.1
         # Augmente le score du personnage.
         player_score += 1
         # Diminue la vitesse du personnage.
