@@ -29,6 +29,7 @@ player_width = 50
 player_height = 100
 player_life = 5
 player_score = 0
+player_animation = 2
 
 # Définition des variables de jeu, dimensions des objets qui tombent du ciel, position des objets qui tombent du ciel, vitesse des objets qui tombent du ciel.
 object_x = random.randint(0, width - 20)
@@ -46,8 +47,6 @@ while True:
             pygame.quit()
             quit()
 
-    # Affichage du personnage.
-    game_window.blit(pygame.transform.scale(pygame.image.load("player.png"), (player_width, player_height)), (player_x, player_y))
     # Affichage des objets qui tombent du ciel.
     game_window.blit(pygame.transform.scale(pygame.image.load("object.png"), (object_width, object_height)), (object_x, object_y))
 
@@ -57,13 +56,18 @@ while True:
     if keys[pygame.K_LEFT]:
         player_x -= player_speed
         # Si la touche flèche gauche est appuyée, le personnage change d'apparence.
-        game_window.blit(pygame.transform.scale(pygame.image.load("player_left.png"), (player_width, player_height)), (player_x, player_y))
+        player_animation = 1
     # Si la touche flèche droite est appuyée, le personnage se déplace vers la droite.
     if keys[pygame.K_RIGHT]:
         player_x += player_speed
         # Si la touche flèche droite est appuyée, le personnage change d'apparence.
-        game_window.blit(pygame.transform.scale(pygame.image.load("player_right.png"), (player_width, player_height)), (player_x, player_y))
+        player_animation = 0
     object_y += object_speed
+    
+    # Quand auncune touche n'est appuyée, le personnage reste immobile.
+    if keys[pygame.K_LEFT] == False and keys[pygame.K_RIGHT] == False:
+        # Apparance par défaut du personnage (immobile).
+        player_animation = 2
     
     # Permet de définir les limites de déplacement du personnage et des objets, pour qu'il ne sorte pas de la fenêtre de jeu.
     if player_x <= 0:
@@ -116,6 +120,17 @@ while True:
     if keys[pygame.K_ESCAPE]:
         pygame.quit()
         quit()
+
+    if player_animation == 0:
+        # Affichage du personnage qui se déplace vers la droite.
+        game_window.blit(pygame.transform.scale(pygame.image.load("player_right.png"), (player_width, player_height)), (player_x, player_y))
+    elif player_animation == 1:
+        # Affichage du personnage qui se déplace vers la gauche.
+        game_window.blit(pygame.transform.scale(pygame.image.load("player_left.png"), (player_width, player_height)), (player_x, player_y))
+    else:
+        # Affichage du personnage immobile.
+        game_window.blit(pygame.transform.scale(pygame.image.load("player.png"), (player_width, player_height)), (player_x, player_y))
+
     
     # Affichage du score du personnage.
     game_window.blit(pygame.font.SysFont("Arial", 20).render("Score: " + str(player_score), True, WHITE), (15, 10))
