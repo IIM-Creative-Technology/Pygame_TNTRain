@@ -16,7 +16,7 @@ python Minecraft_tnt_rain.py
 <hr>
 <h2>Contexte & Règles du jeu</h2>
 
-Dans ce jeu, le joueur commence avec 5 vies. Lorsqu'il touche un bloc de TNT, il perd une vie. Si le joueur touche un coeur, il en gagne une. Au fur et à mesure que le joueur avance dans la partie, les blocs deviennent plus rapides et les vies deviennnet plus lente. De plus, la vitesse du personnage du joueur diminue pour ajouter de la difficulté au jeu. L'objectif du jeu est de survivre le plus longtemps possible sans se faire toucher par les blocs de TNT.
+Dans ce jeu, le joueur commence avec 5 vies. Lorsqu'il touche un bloc de TNT, il perd une vie. Si le joueur touche un coeur, il en gagne une. Au fur et à mesure que le joueur avance dans la partie, les blocs deviennent plus rapides et les vies deviennent plus lente. De plus, la vitesse du personnage du joueur diminue pour ajouter de la difficulté au jeu. L'objectif du jeu est de survivre le plus longtemps possible sans se faire toucher par les blocs de TNT.
 
 Pour jouer, utilisez les touches fléchées droite et gauche de votre clavier pour déplacer votre personnage à droite ou à gauche. Essayez d'éviter les blocs de TNT le plus longtemps possible pour marquer le plus de points possible.
 
