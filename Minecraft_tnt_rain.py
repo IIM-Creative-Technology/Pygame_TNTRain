@@ -130,7 +130,6 @@ while True:
     else:
         # Affichage du personnage immobile.
         game_window.blit(pygame.transform.scale(pygame.image.load("player.png"), (player_width, player_height)), (player_x, player_y))
-
     
     # Affichage du score du personnage.
     game_window.blit(pygame.font.SysFont("Arial", 20).render("Score: " + str(player_score), True, WHITE), (15, 10))
