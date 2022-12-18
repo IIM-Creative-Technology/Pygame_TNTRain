@@ -14,7 +14,7 @@ width = 640
 height = 480
 game_window = pygame.display.set_mode((width, height))
 
-Tnts = [Tnt(), Tnt()]
+Tnts = [Tnt(), Tnt(), Tnt(), Tnt()]
 Heals = [Heal()]
 Coins = [Coin()]
 
@@ -75,8 +75,9 @@ while True:
                     pygame.display.flip()
                     pygame.time.delay(3000)
                     p = Player()
-                    Tnts = [Tnt(), Tnt()]
+                    Tnts = [Tnt(), Tnt(), Tnt(), Tnt()]
                     Heals = [Heal()]
+                    Coins = [Coin()]
                     score = 0
                     health = 5
                     
@@ -94,7 +95,17 @@ while True:
                 Coins.append(Coin())
                 Coins.remove(c)
                 score += 1
-                
+    
+    if score % 1 == 0 and score != 0:
+        for t in Tnts:
+            t.vit += 0.00001
+            c.vit += 0.000025
+    
+    if health % 1 == 0 and health != 0:
+        for h in Heals:
+            t.vit += 0.000025
+            c.vit += 0.000025
+    
     text = font.render("Score: " + str(score), 1, WHITE)
     game_window.blit(text, (10, 10))
     text2 = font2.render("Health: " + str(health), 1, WHITE)
